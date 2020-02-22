@@ -9,11 +9,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "isomorphic-unfetch": "^3.0.0",
     "next": "^9.2.2",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "swr": "^0.1.17"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.3",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
