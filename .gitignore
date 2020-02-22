@@ -256,3 +256,6 @@ fabric.properties
 
 # Next.js
 .next/
+
+# Zeit now
+.now
