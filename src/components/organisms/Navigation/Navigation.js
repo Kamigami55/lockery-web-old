@@ -1,11 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import RestoreIcon from "@material-ui/icons/Restore";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
+import MapIcon from "@material-ui/icons/Map";
+import SearchIcon from "@material-ui/icons/Search";
+import SettingsIcon from "@material-ui/icons/Settings";
 
 Navigation.propTypes = {};
 
@@ -21,9 +20,9 @@ function Navigation(props) {
       showLabels
       {...props}
     >
-      <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-      <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-      <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="Map" icon={<MapIcon />} />
+      <BottomNavigationAction label="Find nearest" icon={<SearchIcon />} />
+      <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
     </BottomNavigation>
   );
 }
