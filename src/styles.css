@@ -1,0 +1,15 @@
+/* For sticky footer */
+/* ref: https://css-tricks.com/couple-takes-sticky-footer/#article-header-id-3 */
+html, body, #root, #__next {
+  height: 100%;
+}
+body, #root, #__next{
+  display: flex;
+  flex-direction: column;
+}
+#page-content {
+  flex: 1 0 auto;
+}
+#bottom-navigation {
+  flex-shrink: 0;
+}
