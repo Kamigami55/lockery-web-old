@@ -7,6 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import "../styles.css";
 
 import theme from "../utils/theme";
+import Layout from "../components/templates/layouts/Layout";
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -32,7 +33,9 @@ export default class MyApp extends App {
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </ThemeProvider>
       </React.Fragment>
     );
