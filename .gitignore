@@ -98,6 +98,7 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
+.env.build
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -256,6 +257,7 @@ fabric.properties
 
 # Next.js
 .next/
+next.config.js
 
 # Zeit now
 .now
