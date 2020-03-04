@@ -14,20 +14,22 @@ function IndexTemplate(props) {
   const { lockers = [] } = props;
 
   return (
-    <GoogleMapReact
-      bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
-      defaultCenter={{ lat: 25.047, lng: 121.522 }}
-      defaultZoom={13}
-    >
-      {lockers.map(locker => (
-        <Marker
-          key={locker.id}
-          lat={locker.latitude}
-          lng={locker.longitude}
-          title={locker.locationDisplay}
-        />
-      ))}
-    </GoogleMapReact>
+    <div style={{ position: "absolute", height: "100%", width: "100%" }}>
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
+        defaultCenter={{ lat: 25.047, lng: 121.522 }}
+        defaultZoom={13}
+      >
+        {lockers.map(locker => (
+          <Marker
+            key={locker.id}
+            lat={locker.latitude}
+            lng={locker.longitude}
+            title={locker.locationDisplay}
+          />
+        ))}
+      </GoogleMapReact>
+    </div>
   );
 }
 

@@ -9,6 +9,7 @@ body, #root, #__next{
 }
 #page-content {
   flex: 1 0 auto;
+  position: relative;
 }
 #bottom-navigation {
   flex-shrink: 0;
