@@ -7,11 +7,11 @@ import { GOOGLE_API_KEY } from "../../../constants/envValues";
 import Marker from "../../atoms/Marker";
 
 IndexTemplate.propTypes = {
-  lockers: PropTypes.array
+  lockerSets: PropTypes.object
 };
 
 function IndexTemplate(props) {
-  const { lockers = [] } = props;
+  const { lockerSets = {} } = props;
 
   return (
     <div style={{ position: "absolute", height: "100%", width: "100%" }}>
@@ -20,12 +20,12 @@ function IndexTemplate(props) {
         defaultCenter={{ lat: 25.047, lng: 121.522 }}
         defaultZoom={13}
       >
-        {lockers.map(locker => (
+        {Object.values(lockerSets).map(lockerSet => (
           <Marker
-            key={locker.id}
-            lat={locker.latitude}
-            lng={locker.longitude}
-            title={locker.locationDisplay}
+            key={lockerSet[0].sid}
+            lat={lockerSet[0].latitude}
+            lng={lockerSet[0].longitude}
+            title={lockerSet[0].locationDisplay}
           />
         ))}
       </GoogleMapReact>
