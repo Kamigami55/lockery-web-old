@@ -3,7 +3,7 @@ import React from "react";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import MapIcon from "@material-ui/icons/Map";
-import SearchIcon from "@material-ui/icons/Search";
+import NearMeIcon from "@material-ui/icons/NearMe";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Fab from "@material-ui/core/Fab";
 
@@ -23,15 +23,9 @@ function Navigation(props) {
         {...props}
       >
         <BottomNavigationAction label="Map" icon={<MapIcon />} />
-        <Fab
-          className="fab"
-          color="primary"
-          size="large"
-          aria-label="Find nearest"
-        >
-          <SearchIcon color="inherit" />
+        <Fab className="fab" color="primary" size="large" aria-label="Nearby">
+          <NearMeIcon color="inherit" />
         </Fab>
-        {/*<BottomNavigationAction label="" icon={<SearchIcon />} />*/}
         <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
       </BottomNavigation>
 
