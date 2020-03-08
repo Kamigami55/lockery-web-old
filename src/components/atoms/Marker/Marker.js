@@ -15,7 +15,7 @@ function Marker(props) {
   return (
     <div>
       <div
-        className="pin"
+        className="pin bounce"
         style={{ backgroundColor: color, cursor: "pointer" }}
         title={title}
         {...other}

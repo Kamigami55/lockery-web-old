@@ -1,9 +1,5 @@
-import Layout from "../../components/templates/layouts/Layout";
+import SettingsTemplate from "../../components/templates/SettingsTemplate";
 
 export default function SettingsPage() {
-  return (
-    <Layout>
-      <p>This is the settings page</p>
-    </Layout>
-  );
+  return <SettingsTemplate />;
 }

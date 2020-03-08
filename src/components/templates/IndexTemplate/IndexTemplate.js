@@ -7,11 +7,14 @@ import { GOOGLE_API_KEY } from "../../../constants/envValues";
 import Marker from "../../atoms/Marker";
 
 IndexTemplate.propTypes = {
-  lockerSets: PropTypes.object
+  lockerSets: PropTypes.object.isRequired
+};
+IndexTemplate.defaultProps = {
+  lockerSets: {}
 };
 
 function IndexTemplate(props) {
-  const { lockerSets = {} } = props;
+  const { lockerSets } = props;
 
   return (
     <div style={{ position: "absolute", height: "100%", width: "100%" }}>

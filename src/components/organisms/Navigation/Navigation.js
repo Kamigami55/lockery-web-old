@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -7,20 +8,27 @@ import NearMeIcon from "@material-ui/icons/NearMe";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Fab from "@material-ui/core/Fab";
 
-Navigation.propTypes = {};
+Navigation.propTypes = {
+  activeTab: PropTypes.number.isRequired,
+  onChangeActiveTab: PropTypes.func.isRequired
+};
+Navigation.defaultProps = {
+  activeTab: 0,
+  onChangeActiveTab: () => {}
+};
 
 function Navigation(props) {
-  const [value, setValue] = React.useState(0);
+  const { activeTab, onChangeActiveTab, ...other } = props;
 
   return (
     <div>
       <BottomNavigation
-        value={value}
+        value={activeTab}
         onChange={(event, newValue) => {
-          setValue(newValue);
+          onChangeActiveTab(newValue);
         }}
         showLabels
-        {...props}
+        {...other}
       >
         <BottomNavigationAction label="Map" icon={<MapIcon />} />
         <Fab className="fab" color="primary" size="large" aria-label="Nearby">
