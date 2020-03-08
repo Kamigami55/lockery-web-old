@@ -22,6 +22,9 @@ function IndexTemplate(props) {
         bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
         defaultCenter={{ lat: 25.047, lng: 121.522 }}
         defaultZoom={13}
+        options={{
+          clickableIcons: false
+        }}
       >
         {Object.values(lockerSets).map(lockerSet => (
           <Marker
