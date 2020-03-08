@@ -4,12 +4,14 @@ import _ from "lodash";
 
 import IndexTemplate from "../../components/templates/IndexTemplate";
 import { GOOGLE_API_KEY } from "../../constants/envValues";
+import { useIsMounted } from "../../hooks/useIsMounted";
 
 const DOC_ID = "1R_ThYd46INZKxI_pI9U0K4UYu765SeITotvcgQ-FzOQ";
 const SHEET_ID = 802463590; // 台北捷運
 
 export default function IndexPage() {
   const [lockerSets, setLockerSets] = React.useState({});
+  const isMounted = useIsMounted();
 
   // Fetch lockers data when page mount
   React.useEffect(() => {
@@ -30,7 +32,10 @@ export default function IndexPage() {
 
       // group by sid https://stackoverflow.com/a/40775082/6728679
       const lockerSets = _.mapValues(_.groupBy(lockers, "sid"));
-      setLockerSets(lockerSets);
+
+      if (isMounted) {
+        setLockerSets(lockerSets);
+      }
     }
     fetchLockers();
   }, []);
