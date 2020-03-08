@@ -11,14 +11,13 @@ Marker.defaultProps = {
 };
 
 function Marker(props) {
-  const { color, title, ...other } = props;
+  const { color, title } = props;
   return (
     <div>
       <div
         className="pin bounce"
         style={{ backgroundColor: color, cursor: "pointer" }}
         title={title}
-        {...other}
       />
 
       <style jsx>{`
