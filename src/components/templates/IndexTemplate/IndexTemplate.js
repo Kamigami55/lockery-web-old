@@ -7,7 +7,7 @@ import GoogleMapReact from "google-map-react";
 
 import { GOOGLE_API_KEY } from "../../../constants/envValues";
 import Marker from "../../atoms/Marker";
-import { DefaultCenter, DefaultZoom } from "../../../pages/index";
+import { DefaultCenter, DefaultZoom } from "../../../constants/mapConstants";
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 

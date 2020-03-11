@@ -5,15 +5,10 @@ import IndexTemplate from "../components/templates/IndexTemplate";
 import { GOOGLE_API_KEY } from "../constants/envValues";
 import { useIsMounted } from "../hooks/useIsMounted";
 import useUserLocation from "../hooks/useUserLocation";
+import { DefaultCenter, DefaultZoom } from "../constants/mapConstants";
 
 const DOC_ID = "1R_ThYd46INZKxI_pI9U0K4UYu765SeITotvcgQ-FzOQ";
 const SHEET_ID = 802463590; // 台北捷運
-
-export const DefaultCenter = {
-  lat: 25.047,
-  lng: 121.522
-};
-export const DefaultZoom = 15;
 
 export default function index() {
   const [lockerSets, setLockerSets] = React.useState([]);
@@ -24,7 +19,12 @@ export default function index() {
   const [zoom, setZoom] = React.useState(DefaultZoom);
 
   const handleMapChildClick = key => {
-    setActiveLockerSet(lockerSets.find(lockerSet => lockerSet.sid === key));
+    const activeLockerSet = lockerSets.find(lockerSet => lockerSet.sid === key);
+    setActiveLockerSet(activeLockerSet);
+    setCenter({
+      lat: activeLockerSet.latitude,
+      lng: activeLockerSet.longitude
+    });
   };
   const handleCloseDrawer = () => {
     setActiveLockerSet(null);
@@ -55,16 +55,16 @@ export default function index() {
         sid: row.sid,
         type: row.type,
         locationDisplay: row.locationDisplay,
-        latitude: row.latitude,
-        longitude: row.longitude,
+        latitude: parseFloat(row.latitude),
+        longitude: parseFloat(row.longitude),
         isInRestrictArea: row.isInRestrictArea,
         // attributes of each locker
         lid: row.lid,
         paymentMethod: row.paymentMethod,
         price: row.price,
         sizeInDimension: row.sizeInDimension,
-        numSlot: row.numSlot,
-        numSlotAvailable: row.numSlotAvailable
+        numSlot: parseInt(row.numSlot),
+        numSlotAvailable: parseInt(row.numSlotAvailable)
       }));
 
       const lockerSets = [];
