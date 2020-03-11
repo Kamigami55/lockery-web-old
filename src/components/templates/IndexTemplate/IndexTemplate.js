@@ -7,6 +7,7 @@ import GoogleMapReact from "google-map-react";
 
 import { GOOGLE_API_KEY } from "../../../constants/envValues";
 import Marker from "../../atoms/Marker";
+import { DefaultCenter, DefaultZoom } from "../../../pages/index";
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
@@ -15,14 +16,20 @@ IndexTemplate.propTypes = {
   activeLockerSet: PropTypes.object,
   onMapChildClick: PropTypes.func.isRequired,
   drawerOpen: PropTypes.bool.isRequired,
-  onCloseDrawer: PropTypes.func.isRequired
+  onCloseDrawer: PropTypes.func.isRequired,
+  center: PropTypes.object.isRequired,
+  zoom: PropTypes.number.isRequired,
+  handleMapChange: PropTypes.func.isRequired
 };
 IndexTemplate.defaultProps = {
   lockerSets: [],
   activeLockerSet: null,
   onMapChildClick: () => {},
   drawerOpen: false,
-  onCloseDrawer: () => {}
+  onCloseDrawer: () => {},
+  center: DefaultCenter,
+  zoom: DefaultZoom,
+  handleMapChange: () => {}
 };
 
 function IndexTemplate(props) {
@@ -31,18 +38,23 @@ function IndexTemplate(props) {
     activeLockerSet,
     onMapChildClick,
     drawerOpen,
-    onCloseDrawer
+    onCloseDrawer,
+    center,
+    zoom,
+    handleMapChange
   } = props;
+
   return (
     <div style={{ position: "absolute", height: "100%", width: "100%" }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
-        defaultCenter={{ lat: 25.047, lng: 121.522 }}
-        defaultZoom={13}
+        center={center}
+        zoom={zoom}
+        onChange={handleMapChange}
         onChildClick={onMapChildClick}
         options={{
           clickableIcons: false,
-          fullscreenControl: false,
+          fullscreenControl: false
         }}
       >
         {lockerSets.map(lockerSet => (

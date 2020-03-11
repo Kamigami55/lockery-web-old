@@ -4,14 +4,24 @@ import { GoogleSpreadsheet } from "google-spreadsheet";
 import IndexTemplate from "../components/templates/IndexTemplate";
 import { GOOGLE_API_KEY } from "../constants/envValues";
 import { useIsMounted } from "../hooks/useIsMounted";
+import useUserLocation from "../hooks/useUserLocation";
 
 const DOC_ID = "1R_ThYd46INZKxI_pI9U0K4UYu765SeITotvcgQ-FzOQ";
 const SHEET_ID = 802463590; // 台北捷運
+
+export const DefaultCenter = {
+  lat: 25.047,
+  lng: 121.522
+};
+export const DefaultZoom = 15;
 
 export default function index() {
   const [lockerSets, setLockerSets] = React.useState([]);
   const isMounted = useIsMounted();
   const [activeLockerSet, setActiveLockerSet] = React.useState(null);
+  const { userLocation } = useUserLocation();
+  const [center, setCenter] = React.useState(DefaultCenter);
+  const [zoom, setZoom] = React.useState(DefaultZoom);
 
   const handleMapChildClick = key => {
     setActiveLockerSet(lockerSets.find(lockerSet => lockerSet.sid === key));
@@ -19,6 +29,16 @@ export default function index() {
   const handleCloseDrawer = () => {
     setActiveLockerSet(null);
   };
+  const handleMapChange = ({ center, zoom }) => {
+    setCenter(center);
+    setZoom(zoom);
+  };
+
+  React.useEffect(() => {
+    if (userLocation) {
+      setCenter(userLocation);
+    }
+  }, [userLocation]);
 
   // Fetch lockers data when page mount
   React.useEffect(() => {
@@ -87,6 +107,9 @@ export default function index() {
       onMapChildClick={handleMapChildClick}
       drawerOpen={activeLockerSet !== null}
       onCloseDrawer={handleCloseDrawer}
+      center={center}
+      zoom={zoom}
+      onMapChange={handleMapChange}
     />
   );
 }
