@@ -8,6 +8,7 @@ import GoogleMapReact from "google-map-react";
 import { GOOGLE_API_KEY } from "../../../constants/envValues";
 import Marker from "../../atoms/Marker";
 import { DefaultCenter, DefaultZoom } from "../../../constants/mapConstants";
+import LockerSetDetail from "../../organisms/LockerSetDetail";
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
@@ -77,12 +78,7 @@ function IndexTemplate(props) {
         disableSwipeToOpen
         BackdropProps={{ invisible: true }}
       >
-        <p>{activeLockerSet?.locationDisplay}</p>
-        <p>{activeLockerSet?.locationDisplay}</p>
-        <p>{activeLockerSet?.locationDisplay}</p>
-        <p>{activeLockerSet?.locationDisplay}</p>
-        <p>{activeLockerSet?.locationDisplay}</p>
-        <p>{activeLockerSet?.locationDisplay}</p>
+        <LockerSetDetail lockerSet={activeLockerSet} />
       </SwipeableDrawer>
     </div>
   );
