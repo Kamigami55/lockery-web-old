@@ -8,6 +8,11 @@ import NearMeIcon from "@material-ui/icons/NearMe";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Fab from "@material-ui/core/Fab";
 
+import {
+  MainDrawerAction,
+  useMainButtonContext
+} from "../../../contexts/mainButtonContext";
+
 Navigation.propTypes = {
   activeTab: PropTypes.number.isRequired,
   onChangeActiveTab: PropTypes.func.isRequired
@@ -20,6 +25,11 @@ Navigation.defaultProps = {
 function Navigation(props) {
   const { activeTab, onChangeActiveTab, ...other } = props;
 
+  const { send } = useMainButtonContext();
+  const handleMainButtonClick = () => {
+    send(MainDrawerAction.TOGGLE);
+  };
+
   return (
     <div>
       <BottomNavigation
@@ -31,7 +41,13 @@ function Navigation(props) {
         {...other}
       >
         <BottomNavigationAction label="Map" icon={<MapIcon />} />
-        <Fab className="fab" color="primary" size="large" aria-label="Nearby">
+        <Fab
+          className="fab"
+          color="primary"
+          size="large"
+          aria-label="Nearby"
+          onClick={handleMainButtonClick}
+        >
           <NearMeIcon color="inherit" />
         </Fab>
         <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />

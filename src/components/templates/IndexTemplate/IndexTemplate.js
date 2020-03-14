@@ -9,6 +9,7 @@ import { GOOGLE_API_KEY } from "../../../constants/envValues";
 import Marker from "../../atoms/Marker";
 import { DefaultCenter, DefaultZoom } from "../../../constants/mapConstants";
 import LockerSetDetail from "../../organisms/LockerSetDetail";
+import { MainDrawerState } from "../../../contexts/mainButtonContext";
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
@@ -16,7 +17,7 @@ IndexTemplate.propTypes = {
   lockerSets: PropTypes.array.isRequired,
   activeLockerSet: PropTypes.object,
   onMapChildClick: PropTypes.func.isRequired,
-  drawerOpen: PropTypes.bool.isRequired,
+  drawerState: PropTypes.string.isRequired,
   onCloseDrawer: PropTypes.func.isRequired,
   center: PropTypes.object.isRequired,
   zoom: PropTypes.number.isRequired,
@@ -26,7 +27,7 @@ IndexTemplate.defaultProps = {
   lockerSets: [],
   activeLockerSet: null,
   onMapChildClick: () => {},
-  drawerOpen: false,
+  drawerState: MainDrawerState.inactive,
   onCloseDrawer: () => {},
   center: DefaultCenter,
   zoom: DefaultZoom,
@@ -38,7 +39,7 @@ function IndexTemplate(props) {
     lockerSets,
     activeLockerSet,
     onMapChildClick,
-    drawerOpen,
+    drawerState,
     onCloseDrawer,
     center,
     zoom,
@@ -68,9 +69,10 @@ function IndexTemplate(props) {
         ))}
       </GoogleMapReact>
 
+      {/* Drawer */}
       <SwipeableDrawer
         anchor="bottom"
-        open={drawerOpen}
+        open={drawerState !== MainDrawerState.inactive}
         onClose={onCloseDrawer}
         onOpen={() => {}}
         disableBackdropTransition={!iOS}
@@ -78,7 +80,11 @@ function IndexTemplate(props) {
         disableSwipeToOpen
         BackdropProps={{ invisible: true }}
       >
-        <LockerSetDetail lockerSet={activeLockerSet} />
+        {drawerState === MainDrawerState.showList ? (
+          <p>List drawer</p>
+        ) : (
+          <LockerSetDetail lockerSet={activeLockerSet} />
+        )}
       </SwipeableDrawer>
     </div>
   );

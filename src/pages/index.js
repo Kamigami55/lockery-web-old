@@ -6,6 +6,10 @@ import { GOOGLE_API_KEY } from "../constants/envValues";
 import { useIsMounted } from "../hooks/useIsMounted";
 import useUserLocation from "../hooks/useUserLocation";
 import { DefaultCenter, DefaultZoom } from "../constants/mapConstants";
+import {
+  MainDrawerAction,
+  useMainButtonContext
+} from "../contexts/mainButtonContext";
 
 const DOC_ID = "1R_ThYd46INZKxI_pI9U0K4UYu765SeITotvcgQ-FzOQ";
 const SHEET_ID = 1551451358; // ALL
@@ -17,6 +21,7 @@ export default function index() {
   const { userLocation } = useUserLocation();
   const [center, setCenter] = React.useState(DefaultCenter);
   const [zoom, setZoom] = React.useState(DefaultZoom);
+  const { state: drawerState, send: sendDrawerAction } = useMainButtonContext();
 
   const handleMapChildClick = key => {
     const activeLockerSet = lockerSets.find(lockerSet => lockerSet.sid === key);
@@ -25,8 +30,10 @@ export default function index() {
       lat: activeLockerSet.latitude,
       lng: activeLockerSet.longitude
     });
+    sendDrawerAction(MainDrawerAction.SHOW_DETAIL);
   };
   const handleCloseDrawer = () => {
+    sendDrawerAction(MainDrawerAction.CLOSE);
     setActiveLockerSet(null);
   };
   const handleMapChange = ({ center, zoom }) => {
@@ -36,7 +43,7 @@ export default function index() {
 
   React.useEffect(() => {
     if (userLocation) {
-      setCenter(userLocation);
+      // setCenter(userLocation);
     }
   }, [userLocation]);
 
@@ -105,7 +112,7 @@ export default function index() {
       lockerSets={lockerSets}
       activeLockerSet={activeLockerSet}
       onMapChildClick={handleMapChildClick}
-      drawerOpen={activeLockerSet !== null}
+      drawerState={drawerState.value}
       onCloseDrawer={handleCloseDrawer}
       center={center}
       zoom={zoom}

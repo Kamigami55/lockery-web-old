@@ -18,6 +18,7 @@ import {
   TERMS_PATH,
   TUTORIAL_PATH
 } from "../constants/pageUrls";
+import { MainButtonContextProvider } from "../contexts/mainButtonContext";
 
 class MyApp extends App {
   componentDidMount() {
@@ -74,12 +75,14 @@ class MyApp extends App {
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Layout
-            activeTab={activeTab}
-            onChangeActiveTab={this.handleChangeActiveTab}
-          >
-            <Component {...pageProps} />
-          </Layout>
+          <MainButtonContextProvider>
+            <Layout
+              activeTab={activeTab}
+              onChangeActiveTab={this.handleChangeActiveTab}
+            >
+              <Component {...pageProps} />
+            </Layout>
+          </MainButtonContextProvider>
         </ThemeProvider>
       </React.Fragment>
     );
