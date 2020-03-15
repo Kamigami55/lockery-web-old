@@ -16,6 +16,9 @@ export default function useUserLocation() {
         },
         () => {
           setIsAllowed(false);
+        },
+        {
+          enableHighAccuracy: true
         }
       );
     } else {
