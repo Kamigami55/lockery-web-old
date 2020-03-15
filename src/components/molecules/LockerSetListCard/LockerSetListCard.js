@@ -7,8 +7,6 @@ import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
-import LockerDetail from "../LockerDetail";
-
 LockerSetListCard.propTypes = {
   lockerSet: PropTypes.object
 };
@@ -21,18 +19,49 @@ const StyledCard = styled(Card)`
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   cursor: pointer;
 `;
+const StyledImg = styled.img`
+  height: 48px;
+`;
 
 function LockerSetListCard({ lockerSet, ...other }) {
   if (!lockerSet) return <Typography>Loading...</Typography>;
 
   const { locationDisplay, lockers } = lockerSet;
 
+  const { price, sizeInDimension, numSlot, numSlotAvailable } = lockers[0];
+
   return (
     <StyledCard {...other}>
       <CardContent>
         <Box m={1}>
           <Typography variant="h6">{locationDisplay}</Typography>
-          <LockerDetail locker={lockers[0]} />
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <StyledImg src="/img/logo.svg" alt="locker" />
+            <div>
+              <Typography variant="overline" gutterBottom>
+                Size
+              </Typography>
+              <Typography variant="h6">{sizeInDimension}</Typography>
+            </div>
+            <div>
+              <Typography variant="overline" gutterBottom>
+                Left
+              </Typography>
+              <Typography variant="h6">
+                {numSlotAvailable}/{numSlot}
+              </Typography>
+            </div>
+            <div>
+              <Typography variant="overline" gutterBottom>
+                Price
+              </Typography>
+              <Typography variant="h6">{price}</Typography>
+            </div>
+          </Box>
         </Box>
       </CardContent>
     </StyledCard>
