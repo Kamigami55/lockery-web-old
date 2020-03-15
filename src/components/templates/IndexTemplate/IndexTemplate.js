@@ -10,6 +10,7 @@ import LockerSetDetail from "../../organisms/LockerSetDetail";
 import { MainDrawerState } from "../../../contexts/mainButtonContext";
 import LockerSetList from "../../organisms/LockerSetList";
 import BottomDrawer from "../../organisms/BottomDrawer";
+import CurrentLocationMarker from "../../atoms/CurrentLocationMarker";
 
 IndexTemplate.propTypes = {
   lockerSets: PropTypes.array.isRequired,
@@ -20,7 +21,8 @@ IndexTemplate.propTypes = {
   center: PropTypes.object.isRequired,
   zoom: PropTypes.number.isRequired,
   handleMapChange: PropTypes.func.isRequired,
-  onSelectLockerSet: PropTypes.func.isRequired
+  onSelectLockerSet: PropTypes.func.isRequired,
+  userLocation: PropTypes.object
 };
 IndexTemplate.defaultProps = {
   lockerSets: [],
@@ -31,7 +33,8 @@ IndexTemplate.defaultProps = {
   center: DefaultCenter,
   zoom: DefaultZoom,
   handleMapChange: () => {},
-  onSelectLockerSet: () => {}
+  onSelectLockerSet: () => {},
+  userLocation: null
 };
 
 function IndexTemplate(props) {
@@ -44,7 +47,8 @@ function IndexTemplate(props) {
     center,
     zoom,
     handleMapChange,
-    onSelectLockerSet
+    onSelectLockerSet,
+    userLocation
   } = props;
 
   return (
@@ -68,6 +72,12 @@ function IndexTemplate(props) {
             title={lockerSet.locationDisplay}
           />
         ))}
+        {userLocation && (
+          <CurrentLocationMarker
+            lat={userLocation.lat}
+            lng={userLocation.lng}
+          />
+        )}
       </GoogleMapReact>
 
       {/* Drawer */}

@@ -49,7 +49,7 @@ export default function index() {
 
   React.useEffect(() => {
     if (userLocation) {
-      // setCenter(userLocation);
+      setCenter(userLocation);
     }
   }, [userLocation]);
 
@@ -124,6 +124,7 @@ export default function index() {
       zoom={zoom}
       onMapChange={handleMapChange}
       onSelectLockerSet={handleSelectLockerSet}
+      userLocation={userLocation}
     />
   );
 }
