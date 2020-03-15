@@ -6,18 +6,26 @@ import Box from "@material-ui/core/Box";
 import LockerSetListCard from "../../molecules/LockerSetListCard";
 
 LockerSetList.propTypes = {
-  lockerSets: PropTypes.array.isRequired
+  lockerSets: PropTypes.array.isRequired,
+  onSelectLockerSet: PropTypes.func.isRequired
 };
 LockerSetList.defaultProps = {
-  lockerSets: []
+  lockerSets: [],
+  onSelectLockerSet: () => {}
 };
 
-function LockerSetList({ lockerSets }) {
+function LockerSetList(props) {
+  const { lockerSets, onSelectLockerSet } = props;
+
   return (
     <div className={"root"}>
       {lockerSets.map(lockerSet => (
         <Box key={lockerSet.sid} m={2}>
-          <LockerSetListCard lockerSet={lockerSet} />
+          {/* TODO 優化onclick效能 */}
+          <LockerSetListCard
+            lockerSet={lockerSet}
+            onClick={() => onSelectLockerSet(lockerSet)}
+          />
         </Box>
       ))}
       <style jsx>{`

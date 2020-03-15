@@ -19,15 +19,16 @@ LockerSetListCard.defaultProps = {
 const StyledCard = styled(Card)`
   border-radius: 0;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 `;
 
-function LockerSetListCard({ lockerSet }) {
+function LockerSetListCard({ lockerSet, ...other }) {
   if (!lockerSet) return <Typography>Loading...</Typography>;
 
   const { locationDisplay, lockers } = lockerSet;
 
   return (
-    <StyledCard>
+    <StyledCard {...other}>
       <CardContent>
         <Box m={1}>
           <Typography variant="h6">{locationDisplay}</Typography>

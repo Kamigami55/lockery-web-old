@@ -19,7 +19,8 @@ IndexTemplate.propTypes = {
   onCloseDrawer: PropTypes.func.isRequired,
   center: PropTypes.object.isRequired,
   zoom: PropTypes.number.isRequired,
-  handleMapChange: PropTypes.func.isRequired
+  handleMapChange: PropTypes.func.isRequired,
+  onSelectLockerSet: PropTypes.func.isRequired
 };
 IndexTemplate.defaultProps = {
   lockerSets: [],
@@ -29,7 +30,8 @@ IndexTemplate.defaultProps = {
   onCloseDrawer: () => {},
   center: DefaultCenter,
   zoom: DefaultZoom,
-  handleMapChange: () => {}
+  handleMapChange: () => {},
+  onSelectLockerSet: () => {}
 };
 
 function IndexTemplate(props) {
@@ -41,7 +43,8 @@ function IndexTemplate(props) {
     onCloseDrawer,
     center,
     zoom,
-    handleMapChange
+    handleMapChange,
+    onSelectLockerSet
   } = props;
 
   return (
@@ -73,7 +76,10 @@ function IndexTemplate(props) {
         onClose={onCloseDrawer}
       >
         {drawerState === MainDrawerState.showList ? (
-          <LockerSetList lockerSets={lockerSets} />
+          <LockerSetList
+            lockerSets={lockerSets}
+            onSelectLockerSet={onSelectLockerSet}
+          />
         ) : (
           <LockerSetDetail lockerSet={activeLockerSet} />
         )}

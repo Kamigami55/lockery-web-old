@@ -23,8 +23,7 @@ export default function index() {
   const [zoom, setZoom] = React.useState(DefaultZoom);
   const { state: drawerState, send: sendDrawerAction } = useMainButtonContext();
 
-  const handleMapChildClick = key => {
-    const activeLockerSet = lockerSets.find(lockerSet => lockerSet.sid === key);
+  const handleSelectLockerSet = activeLockerSet => {
     setActiveLockerSet(activeLockerSet);
     setCenter({
       lat: activeLockerSet.latitude,
@@ -32,10 +31,17 @@ export default function index() {
     });
     sendDrawerAction(MainDrawerAction.SHOW_DETAIL);
   };
+
+  const handleMapChildClick = key => {
+    const activeLockerSet = lockerSets.find(lockerSet => lockerSet.sid === key);
+    handleSelectLockerSet(activeLockerSet);
+  };
+
   const handleCloseDrawer = () => {
     sendDrawerAction(MainDrawerAction.CLOSE);
     setActiveLockerSet(null);
   };
+
   const handleMapChange = ({ center, zoom }) => {
     setCenter(center);
     setZoom(zoom);
@@ -117,6 +123,7 @@ export default function index() {
       center={center}
       zoom={zoom}
       onMapChange={handleMapChange}
+      onSelectLockerSet={handleSelectLockerSet}
     />
   );
 }
