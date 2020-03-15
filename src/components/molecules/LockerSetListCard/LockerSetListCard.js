@@ -7,6 +7,8 @@ import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
+import { formatDistance } from "../../../utils/distance";
+
 LockerSetListCard.propTypes = {
   lockerSet: PropTypes.object
 };
@@ -26,7 +28,7 @@ const StyledImg = styled.img`
 function LockerSetListCard({ lockerSet, ...other }) {
   if (!lockerSet) return <Typography>Loading...</Typography>;
 
-  const { locationDisplay, lockers } = lockerSet;
+  const { locationDisplay, lockers, distance } = lockerSet;
 
   const { price, sizeInDimension, numSlot, numSlotAvailable } = lockers[0];
 
@@ -60,6 +62,12 @@ function LockerSetListCard({ lockerSet, ...other }) {
                 Price
               </Typography>
               <Typography variant="h6">{price}</Typography>
+            </div>
+            <div>
+              <Typography variant="overline" gutterBottom>
+                Distance
+              </Typography>
+              <Typography variant="h6">{formatDistance(distance)}</Typography>
             </div>
           </Box>
         </Box>

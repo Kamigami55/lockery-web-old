@@ -10,6 +10,7 @@ import {
   MainDrawerAction,
   useMainButtonContext
 } from "../contexts/mainButtonContext";
+import { getDistanceBetweenPoints } from "../utils/distance";
 
 const DOC_ID = "1R_ThYd46INZKxI_pI9U0K4UYu765SeITotvcgQ-FzOQ";
 const SHEET_ID = 1551451358; // ALL
@@ -47,11 +48,26 @@ export default function index() {
     setZoom(zoom);
   };
 
+  const updateLockerSetDistance = () => {
+    lockerSets.forEach(lockerSet => {
+      lockerSet.distance = getDistanceBetweenPoints(userLocation, {
+        lat: lockerSet.latitude,
+        lng: lockerSet.longitude
+      });
+    });
+  };
+
   React.useEffect(() => {
     if (userLocation) {
       setCenter(userLocation);
     }
   }, [userLocation]);
+
+  React.useEffect(() => {
+    if (userLocation && lockerSets && lockerSets.length) {
+      updateLockerSetDistance();
+    }
+  }, [userLocation, lockerSets]);
 
   // Fetch lockers data when page mount
   React.useEffect(() => {
@@ -92,6 +108,7 @@ export default function index() {
             latitude: locker.latitude,
             longitude: locker.longitude,
             isInRestrictArea: locker.isInRestrictArea,
+            distance: null,
             lockers: []
           };
           lockerSets.push(newLockerSet);
