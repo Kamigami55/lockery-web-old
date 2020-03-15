@@ -33,6 +33,10 @@ export default function index() {
     sendDrawerAction(MainDrawerAction.SHOW_DETAIL);
   };
 
+  const handleBackButtonClick = () => {
+    sendDrawerAction(MainDrawerAction.PREVIOUS);
+  };
+
   const handleMapChildClick = key => {
     const activeLockerSet = lockerSets.find(lockerSet => lockerSet.sid === key);
     handleSelectLockerSet(activeLockerSet);
@@ -142,6 +146,7 @@ export default function index() {
       onMapChange={handleMapChange}
       onSelectLockerSet={handleSelectLockerSet}
       userLocation={userLocation}
+      onBackButtonClick={handleBackButtonClick}
     />
   );
 }

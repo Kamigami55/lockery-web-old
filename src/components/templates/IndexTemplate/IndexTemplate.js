@@ -11,6 +11,7 @@ import { MainDrawerState } from "../../../contexts/mainButtonContext";
 import LockerSetList from "../../organisms/LockerSetList";
 import BottomDrawer from "../../organisms/BottomDrawer";
 import CurrentLocationMarker from "../../atoms/CurrentLocationMarker";
+import SearchAppBar from "../../organisms/SearchAppBar";
 
 IndexTemplate.propTypes = {
   lockerSets: PropTypes.array.isRequired,
@@ -22,7 +23,8 @@ IndexTemplate.propTypes = {
   zoom: PropTypes.number.isRequired,
   handleMapChange: PropTypes.func.isRequired,
   onSelectLockerSet: PropTypes.func.isRequired,
-  userLocation: PropTypes.object
+  userLocation: PropTypes.object,
+  onBackButtonClick: PropTypes.func.isRequired
 };
 IndexTemplate.defaultProps = {
   lockerSets: [],
@@ -34,7 +36,8 @@ IndexTemplate.defaultProps = {
   zoom: DefaultZoom,
   handleMapChange: () => {},
   onSelectLockerSet: () => {},
-  userLocation: null
+  userLocation: null,
+  onBackButtonClick: () => {}
 };
 
 function IndexTemplate(props) {
@@ -48,11 +51,16 @@ function IndexTemplate(props) {
     zoom,
     handleMapChange,
     onSelectLockerSet,
-    userLocation
+    userLocation,
+    onBackButtonClick
   } = props;
 
   return (
     <div style={{ position: "absolute", height: "100%", width: "100%" }}>
+      <SearchAppBar
+        onBackButtonClick={onBackButtonClick}
+        showBackButton={drawerState !== MainDrawerState.inactive}
+      />
       <GoogleMapReact
         bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
         center={center}

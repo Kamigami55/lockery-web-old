@@ -29,7 +29,9 @@ function BottomDrawer(props) {
       disableBackdropTransition={!iOS}
       disableDiscovery={iOS}
       disableSwipeToOpen
-      BackdropProps={{ invisible: true }}
+      // For no backdrop
+      // TODO fix swipeable feature
+      variant="persistent"
     >
       {children}
     </StyledSwipeableDrawer>
