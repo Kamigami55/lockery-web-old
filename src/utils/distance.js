@@ -3,7 +3,7 @@
  *
  * @param degrees Number of degrees.
  */
-import { formatDecimal } from "./decimal/formatNumber";
+import { formatDecimal, formatInteger } from "./decimal/formatNumber";
 
 function degreesToRadians(degrees) {
   return (degrees * Math.PI) / 180;
@@ -45,5 +45,31 @@ export function formatDistance(meter) {
     return `${formatDecimal(meter / 1000.0, 1, false)}km`;
   } else {
     return `${formatDecimal(meter, 0, false)}m`;
+  }
+}
+
+/**
+ * Returns the time to walk a distance
+ *
+ * @return number seconds
+ * @param distanceInMeter Length in meters
+ */
+export function getWalkTimeFromDistance(distanceInMeter) {
+  // 0.564 is Seconds per meter
+  return 0.564 * distanceInMeter;
+}
+
+/**
+ * Returns a string to represent travel time
+ *
+ * @param timeInSecond Time in seconds
+ */
+export function formatTime(timeInSecond) {
+  if (timeInSecond >= 3600) {
+    return `${formatDecimal(timeInSecond / 3600, 1, false)}h`;
+  } else if (timeInSecond >= 60) {
+    return `${formatInteger(timeInSecond / 60, false)}m`;
+  } else {
+    return `${formatInteger(timeInSecond, false)}s`;
   }
 }
