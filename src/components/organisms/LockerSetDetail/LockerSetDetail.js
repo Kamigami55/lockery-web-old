@@ -18,10 +18,10 @@ function LockerSetDetail(props) {
 
   if (!lockerSet) return <Typography>Loading...</Typography>;
 
-  const { locationDisplay, isInRestrictArea, lockers } = lockerSet;
+  const { locationDisplay, lockers } = lockerSet;
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" className={"root"}>
       <Box my={2}>
         <Typography variant="h4">{locationDisplay}</Typography>
         <Box my={3}>
@@ -30,6 +30,11 @@ function LockerSetDetail(props) {
           ))}
         </Box>
       </Box>
+      <style jsx>{`
+        .root {
+          max-height: 70vh;
+        }
+      `}</style>
     </Container>
   );
 }
